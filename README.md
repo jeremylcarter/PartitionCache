@@ -25,7 +25,7 @@ In your processing code you could partition the items you need to process by the
 
 ![Overview](http://i.imgur.com/jhnLvrK.png)
 
-![Overview2](http://i.imgur.com/uPUmoXw.png)
+![Overview2](http://i.imgur.com/pjLoqVI.png)
 
 ## Client Usage
 
