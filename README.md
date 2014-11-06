@@ -53,4 +53,4 @@ Currently PartitionCache uses .net 4.5 but it can be modified to use 4.0 easily.
 
 ## Tags
 
-Multiple Partitions, Parallelism, Scaling Out, Cache, Key Value Cache, Threading
+Multiple Partitions, Parallelism, Scaling Out, Cache, Key Value Cache, Threading, C#
