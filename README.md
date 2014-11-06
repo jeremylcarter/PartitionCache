@@ -50,3 +50,7 @@ var partition = await partitionClient.AddProducer(topic, person.PersonNumber);
 ## Requirements
 
 Currently PartitionCache uses .net 4.5 but it can be modified to use 4.0 easily.
+
+## Tags
+
+Multiple Partitions, Parallelism, Scaling Out, Cache, Key Value Cache, Threading
