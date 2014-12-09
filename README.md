@@ -1,3 +1,5 @@
+![Logo](http://i.imgur.com/X87oJnP.png)
+
 ## PartitionCache : Split up your workload
 
 PartitionCache is a simple persistent producer partition cache. What does that mean? Well it means it remembers what partition a producer belongs to and allows you to silo your workload into multiple partitions to avoid any multi-threaded headaches or concurrency issues. PartitionCache does not store any events or items that require processing, rather it acts as a persistent store of the partition number each item belongs to.
