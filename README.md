@@ -53,6 +53,14 @@ var partition = await partitionClient.AddProducer(topic, person.PersonNumber);
 
 Currently PartitionCache uses .net 4.5 but it can be modified to use 4.0 easily.
 
+## Roadmap
+
+* Improve performance
+* Add statistic display pages to hosted http server
+* Add ability to override currently allocated partition value
+* Support for partitions larger than 256
+* Support for basic load balancing of partitions instead of currently LRU cache style balancing
+
 ## Tags
 
 Multiple Partitions, Parallelism, Scaling Out, Cache, Key Value Cache, Threading, C#
