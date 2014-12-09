@@ -49,6 +49,11 @@ var partition = await partitionClient.AddProducer(topic, person.PersonNumber);
 
 ```
 
+## Download
+
+* PM> Install-Package PartitionCache.Client
+* PM> Install-Package PartitionCache.Processing
+* 
 ## Requirements
 
 Currently PartitionCache uses .net 4.5 but it can be modified to use 4.0 easily.
