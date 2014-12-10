@@ -53,6 +53,8 @@ var partition = await partitionClient.AddProducer(topic, person.PersonNumber);
 
 PartitionCache backend is a Windows Service. You can strip this out if you want to use Mono. The PartitionCache Windows Service provides the Http API which is accessible by any http client or use the PartitionCache.Client library (available on [Nuget][http://www.nuget.org/packages/PartitionCache.Client/]).
 
+Currently the topics and producers are persisted to disk via XML and Binary serialization as they are simple Dictionary<T>/List<T> structures. This may not be the most ideal scenerio for you so you will have to implement your own provider via the `IPersistenceProvider` interface. When instantiating a Server you will need to provide the persistence provider you have created.
+
 The backend port is default 7070 and this can be changed via configuration file or by recompiling to change the default port variable.
 
 ```XML
@@ -91,10 +93,12 @@ Currently PartitionCache uses .net 4.5 but it can be modified to use 4.0 easily.
 ## Roadmap
 
 * Improve performance
-* Add statistic display pages to hosted http server
+* ~~Add statistic display pages to hosted http server~~
 * Add ability to override currently allocated partition value
-* Support for partitions larger than 256
-* Support for basic load balancing of partitions instead of currently LRU cache style balancing
+* Support for partitions larger than 512
+* ~~Support for basic load balancing of partitions instead of currently LRU cache style balancing~~
+* Clustering support
+* Refactor the providers for SQL Server, Azure SQL, Mongo and PostgreSQL support
 
 ## Tags
 
