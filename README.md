@@ -49,6 +49,36 @@ var partition = await partitionClient.AddProducer(topic, person.PersonNumber);
 
 ```
 
+## Server Usage
+
+PartitionCache backend is a Windows Service. You can strip this out if you want to use Mono. The PartitionCache Windows Service provides the Http API which is accessible by any http client or use the PartitionCache.Client library (available on [Nuget][http://www.nuget.org/packages/PartitionCache.Client/]).
+
+The backend port is default 7070 and this can be changed via configuration file or by recompiling to change the default port variable.
+
+```XML
+<applicationSettings>
+	<PartitionCache.Service.Properties.Settings>
+	    <setting name="IPAddress" serializeAs="String">
+	        <value>localhost</value>
+	    </setting>
+	    <setting name="Port" serializeAs="String">
+	        <value>7070</value>
+	    </setting>
+	</PartitionCache.Service.Properties.Settings>
+</applicationSettings>
+```
+
+## Server Http API
+
+Assumption is that any response that is Http 200 OK is considered "submitted, saved, committed" etc. Any other response is considered erroneous or faulted.
+
+* Add topic http://127.0.0.1/topics/add/myTopicName (returns Http 200 OK)
+* Add topic with partition size http://127.0.0.1/topics/add/myTopicName/128 (returns Http 200 OK)
+* Add producer to topic http://127.0.0.1/myTopicName/add/myProducerName (returns ASCII body containing Partition assigned)
+* Get assigned partition for producer on topic http://127.0.0.1/myTopicName/add/myProducerName (returns ASCII body containing Partition assigned)
+* List all topics http://127.0.0.1/list
+* List all partitions http://127.0.0.1/myTopicName/list
+
 ## Download
 
 * PM> Install-Package PartitionCache.Client
