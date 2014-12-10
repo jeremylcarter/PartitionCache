@@ -19,18 +19,19 @@ namespace PartitionCache
 
         private static Object _partitionLock = new Object();
 
+        public LoadBalanceStrategy LoadBalanceStrategy { get; set; }
         public string Topic { get; set; }
         public ConcurrentDictionary<int, Partition> Partitions { get; set; }
         public ConcurrentDictionary<string, ProducerPartitionCache> ProducerCache { get; set; }
 
-        public TopicCoordinator(string topic = "default", int maxPartitionCount = 16)
+        public TopicCoordinator(string topic = "default", int maxPartitionCount = 32)
         {
             Topic = topic;
             MaxPartitions = maxPartitionCount;
             _random = new Random(DateTime.Now.Millisecond);
             Partitions = new ConcurrentDictionary<int, Partition>();
             ProducerCache = new ConcurrentDictionary<string, ProducerPartitionCache>();
-
+            LoadBalanceStrategy = LoadBalanceStrategy.Count;
             Setup();
         }
 
@@ -46,6 +47,7 @@ namespace PartitionCache
                     var detail = new PartitionDetail();
                     detail.Count = Partitions[i].ProducerCount;
                     detail.Number = Partitions[i].Number;
+                    detail.Throughput = Partitions[i].Throughput;
                     detailList.Add(detail);
                 }
             }
@@ -135,6 +137,7 @@ namespace PartitionCache
                 Task.Run(() =>
                 {
                     Partitions[partition].Producers[producer].LastSubmittedUtc = DateTime.UtcNow;
+                    Partitions[partition].IncreaseThroughput();
                 });
                 return true;
             }
@@ -152,6 +155,7 @@ namespace PartitionCache
                 Partitions.TryGetValue(partition, out part);
                 if (part != null)
                 {
+                    part.IncreaseThroughput();
                     var added = false;
                     lock (part)
                     {

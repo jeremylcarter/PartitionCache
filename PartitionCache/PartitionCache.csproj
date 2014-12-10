@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coordinator.cs" />
+    <Compile Include="LoadBalanceStrategy.cs" />
     <Compile Include="Persistence\Entities\KeyValueItem.cs" />
     <Compile Include="Persistence\Entities\Topic.cs" />
     <Compile Include="Persistence\PersistenceStrategy.cs" />

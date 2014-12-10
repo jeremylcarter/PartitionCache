@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PartitionCache
+namespace PartitionCache.Service.Models
 {
-    public class PartitionDetail
+    public class TopicDetailModel
     {
-        public int Number { get; set; }
+        public string Name { get; set; }
+        public int Partitions { get; set; }
         public int Count { get; set; }
         public long Throughput { get; set; }
+        public int ThroughputPercent { get; set; }
     }
 }

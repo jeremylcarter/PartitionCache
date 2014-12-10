@@ -14,5 +14,6 @@ namespace PartitionCache.Service
         public static DateTime LastVacuum { get; set; }
         public static IPersistenceProvider PersistenceProvider { get; set; }
         public static PersistenceStrategy PersistenceStrategy { get; set; }
+        public static DateTime StartTime { get; set; }
     }
 }

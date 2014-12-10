@@ -15,10 +15,10 @@ namespace PartitionCache.Service
         {
             Get["/add/{producer}", runAsync: true] = async (parameters, ct) =>
             {
-                if (!String.IsNullOrEmpty((string) parameters.producer))
+                if (!String.IsNullOrEmpty((string)parameters.producer))
                 {
-                    var producer = (string) parameters.producer;
-                    var topic = (string) parameters.topic;
+                    var producer = (string)parameters.producer;
+                    var topic = (string)parameters.topic;
 
                     if (ServiceContainer.Coordinator.TopicExists(topic))
                     {
@@ -29,6 +29,12 @@ namespace PartitionCache.Service
                 }
                 return HttpStatusCode.BadRequest;
 
+            };
+
+            Get["/list", runAsync: true] = async (parameters, ct) =>
+            {
+                var topic = (string)parameters.topic;
+                return Response.AsJson(ServiceContainer.Coordinator.Topics[topic].GetPartitionDetails());
             };
         }
     }

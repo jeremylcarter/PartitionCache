@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PartitionCache
 {
-    public class PartitionDetail
+    public enum LoadBalanceStrategy
     {
-        public int Number { get; set; }
-        public int Count { get; set; }
-        public long Throughput { get; set; }
+        Count = 0,
+        Throughput = 1,
+        Random = 2
     }
 }

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>PartitionCache</title>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- Header -->
+<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-toggle"></span>
+      </button>
+      <a class="navbar-brand" href="#">PartitionCache</a>
+    </div>
+  </div><!-- /container -->
+</div>
+
+<div class="container">
+
+ <!-- upper section -->
+  <div class="row">
+	
+    <div class="col-sm-12">
+      	
+      <!-- column 2 -->	
+       <h3><i class="glyphicon glyphicon-dashboard"></i> Topics</h3>  
+            
+       <hr>
+      
+	   <div class="row">
+         	<div class="col-md-12">
+			  
+			  <table class="table table-striped">
+				<thead>
+				  <tr><th>Name</th><th>Count</th><th>Partitions</th><th>Throughput</th><th>&nbsp;</th></tr>
+				</thead>
+				<tbody>
+					@Each.Topics
+						<tr>
+							<td>@Current.Name</td>
+							<td>@Current.Count</td>
+							<td>@Current.Partitions</td>
+							<td>@Current.ThroughputPercent %</td>
+							<td>&nbsp;</td>
+						<tr>
+					@EndEach
+				</tbody>
+			  </table>
+
+			</div>
+     
+       </div><!--/row-->
+  	</div><!--/col-span-9-->
+    
+  </div><!--/row-->
+  <!-- /upper section -->
+
+</div>
+</body>
+</html>

@@ -16,6 +16,7 @@ namespace PartitionCache
         public DateTime LastCleanedUtc { get; set; }
         public DateTime CreatedUtc { get; set; }
         public int Number { get; set; }
+        public long Throughput { get; set; }
         public Partition()
         {
             Producers = new ConcurrentDictionary<string, Producer>();
@@ -32,6 +33,31 @@ namespace PartitionCache
                 catch (Exception ex)
                 {
                     return 0;
+                }
+            }
+        }
+
+        public void IncreaseThroughput()
+        {
+            try
+            {
+                lock (this)
+                {
+                    Throughput += 1;
+                }
+            }
+            catch (Exception)
+            {
+                try
+                {
+                    if (Throughput != Int64.MaxValue)
+                    {
+                        Throughput = (Throughput + 1);
+                    }
+                }
+                catch (Exception)
+                {
+                    Throughput = Int64.MaxValue;
                 }
             }
         }
